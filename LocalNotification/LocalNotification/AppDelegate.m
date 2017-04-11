@@ -18,6 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     NSLog(@"launchOptions=%@",launchOptions);
+    
     return YES;
 }
 
@@ -49,10 +50,30 @@
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
-
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
+#pragma UNUserNotificationCenterDelegate
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{//foreground
     
 }
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler{//app 从后台启动
+    
+}
+#pragma mark- UIAlicationDelegete
+//-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{//实现了UNUserNotificationCenterDelegate的话，appdelegete中不走这个方法
+    //    [application applicationState];
+//    UIApplicationStateActive,
+//    UIApplicationStateInactive,
+//    UIApplicationStateBackground
+    
+//}
+//-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+//    
+//}
+//-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+//    
+//}
+
+
+
 #pragma mark - Core Data stack
 
 @synthesize persistentContainer = _persistentContainer;
